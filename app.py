@@ -3,8 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import joblib
-import tensorflow as tf
-from tensorflow.keras.models import load_model
+
 
 st.set_page_config(page_title="AAPL Forecast Dashboard", layout="wide")
 
@@ -57,7 +56,7 @@ st.dataframe(results_df)
 # -------------------------------
 model_choice = st.selectbox(
     "Select Model for 30-Day Forecast",
-    ["Random Forest", "XGBoost", "LSTM"]
+    ["Random Forest", "XGBoost", ]
 )
 
 X = df.drop(['Date', 'Close'], axis=1, errors='ignore').iloc[-1:].copy()
@@ -71,11 +70,6 @@ elif model_choice == "XGBoost":
     pred = best_xgb.predict(scaled)[0]
     st.success(f"🚀 XGBoost Prediction: {pred}")
 
-elif model_choice == "LSTM":
-    scaled = scaler_xgb.transform(X)
-    reshaped = scaled.reshape(1,1,scaled.shape[1])
-    pred = lstm_model.predict(reshaped)[0][0]
-    st.success(f"🤖 LSTM Prediction: {pred}")
 
 
 # -------------------------------
