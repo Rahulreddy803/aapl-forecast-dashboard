@@ -2,9 +2,8 @@ streamlit
 pandas
 numpy
 matplotlib
-yfinance
 scikit-learn
-xgboost
-statsmodels
 joblib
+xgboost
+
 
