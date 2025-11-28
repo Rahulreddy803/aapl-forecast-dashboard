@@ -1,8 +1,11 @@
 import streamlit as st
+st.cache_resource.clear()   # <--- ADD THIS LINE
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import joblib
+
 
 
 st.set_page_config(page_title="AAPL Forecast Dashboard", layout="wide")
@@ -14,14 +17,18 @@ st.title("📈 Apple Stock Forecast Dashboard")
 # -------------------------------
 @st.cache_resource
 def load_all_models():
-    rf = joblib.load("rf.joblib")
-    xgb = joblib.load("xg.joblib")
+    # Correct filenames exactly as they appear in your repository
+    rf = joblib.load("rf.joblib")  
+    xgb = joblib.load("xg.joblib")  
     scaler = joblib.load("scaler.joblib")
-    lstm = load_model("lstm_model.h5")
+    lstm = None  # Since you removed LSTM
     results = pd.read_csv("model_results.csv")
+
     return rf, xgb, scaler, lstm, results
 
+
 rf, best_xgb, scaler_xgb, lstm_model, results_df = load_all_models()
+
 
 
 # -------------------------------
